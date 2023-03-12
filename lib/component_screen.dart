@@ -960,6 +960,12 @@ const List<NavigationDestination> appBarDestinations = [
     icon: Icon(Icons.invert_colors_on_outlined),
     label: 'Elevation',
     selectedIcon: Icon(Icons.opacity),
+  ),
+  NavigationDestination(
+    tooltip: '',
+    icon: Icon(Icons.question_mark_outlined),
+    label: 'Question',
+    selectedIcon: Icon(Icons.question_mark_rounded),
   )
 ];
 

@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:gmat_coach/question.dart';
 
 import 'color_palettes_screen.dart';
 import 'component_screen.dart';
@@ -120,6 +121,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         return const ColorPalettesScreen();
       case ScreenSelected.typography:
         return const TypographyScreen();
+      case ScreenSelected.question:
+        return QuestionScreen(
+          railAnimation: railAnimation,
+        );
       case ScreenSelected.elevation:
         return const ElevationScreen();
       default:
@@ -132,9 +137,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   PreferredSizeWidget createAppBar() {
     return AppBar(
-      title: widget.useMaterial3
-          ? const Text('Material 3')
-          : const Text('Material 2'),
+      title: Text("GMAT Coach"),
       actions: !showMediumSizeLayout && !showLargeSizeLayout
           ? [
               _BrightnessButton(
