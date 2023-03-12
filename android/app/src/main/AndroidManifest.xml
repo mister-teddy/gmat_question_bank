@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.material_3_demo">
+    package="com.example.gmat_coach">
    <application
-        android:label="material_3_demo"
+        android:label="GMAT Coach"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
