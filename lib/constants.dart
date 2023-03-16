@@ -30,12 +30,23 @@ enum ColorSeed {
 }
 
 enum ScreenSelected {
-  component(0),
-  color(1),
-  typography(2),
-  elevation(3),
-  question(4);
+  ds(0),
+  ps(1),
+  cr(2),
+  sc(3),
+  rc(4);
 
   const ScreenSelected(this.value);
   final int value;
+}
+
+enum CategoryNames {
+  ds('Data Sufficiency'),
+  ps('Problem Solving'),
+  cr('Critical Reasoning'),
+  sc('Sentence Correction'),
+  rc('Reading Comprehension');
+
+  const CategoryNames(this.value);
+  final String value;
 }

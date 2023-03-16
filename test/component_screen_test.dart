@@ -5,7 +5,7 @@
 // ignore_for_file: avoid_types_on_closure_parameters
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gmat_coach/component_screen.dart';
+import 'package:gmat_coach/widgets/component_screen.dart';
 import 'package:gmat_coach/main.dart';
 
 void main() {

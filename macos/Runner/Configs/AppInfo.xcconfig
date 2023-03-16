@@ -8,7 +8,7 @@
 PRODUCT_NAME = GMAT Coach
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.material3Demo
+PRODUCT_BUNDLE_IDENTIFIER = io.github.nguyenhongphat0.coachGMAT
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.

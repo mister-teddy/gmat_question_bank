@@ -3,13 +3,13 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:gmat_coach/question.dart';
+import 'package:gmat_coach/menu.dart';
+import 'package:gmat_coach/state.dart';
+import 'package:provider/provider.dart';
+import 'package:gmat_coach/layouts/question.dart';
 
-import 'color_palettes_screen.dart';
-import 'component_screen.dart';
-import 'constants.dart';
-import 'elevation_screen.dart';
-import 'typography_screen.dart';
+import '../widgets/component_screen.dart';
+import '../constants.dart';
 
 class Home extends StatefulWidget {
   const Home({
@@ -40,8 +40,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   bool controllerInitialized = false;
   bool showMediumSizeLayout = false;
   bool showLargeSizeLayout = false;
-
-  int screenIndex = ScreenSelected.component.value;
 
   @override
   initState() {
@@ -95,43 +93,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     }
   }
 
-  void handleScreenChanged(int screenSelected) {
-    setState(() {
-      screenIndex = screenSelected;
-    });
-  }
-
   Widget createScreenFor(
       ScreenSelected screenSelected, bool showNavBarExample) {
     switch (screenSelected) {
-      case ScreenSelected.component:
-        return Expanded(
-          child: OneTwoTransition(
-            animation: railAnimation,
-            one: FirstComponentList(
-                showNavBottomBar: showNavBarExample,
-                scaffoldKey: scaffoldKey,
-                showSecondList: showMediumSizeLayout || showLargeSizeLayout),
-            two: SecondComponentList(
-              scaffoldKey: scaffoldKey,
-            ),
-          ),
-        );
-      case ScreenSelected.color:
-        return const ColorPalettesScreen();
-      case ScreenSelected.typography:
-        return const TypographyScreen();
-      case ScreenSelected.question:
+      default:
         return QuestionScreen(
           railAnimation: railAnimation,
         );
-      case ScreenSelected.elevation:
-        return const ElevationScreen();
-      default:
-        return FirstComponentList(
-            showNavBottomBar: showNavBarExample,
-            scaffoldKey: scaffoldKey,
-            showSecondList: showMediumSizeLayout || showLargeSizeLayout);
     }
   }
 
@@ -235,47 +203,48 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: controller,
-      builder: (context, child) {
-        return NavigationTransition(
-          scaffoldKey: scaffoldKey,
-          animationController: controller,
-          railAnimation: railAnimation,
-          appBar: createAppBar(),
-          body: createScreenFor(
-              ScreenSelected.values[screenIndex], controller.value == 1),
-          navigationRail: NavigationRail(
-            extended: showLargeSizeLayout,
-            destinations: navRailDestinations,
-            selectedIndex: screenIndex,
-            onDestinationSelected: (index) {
-              setState(() {
-                screenIndex = index;
-                handleScreenChanged(screenIndex);
-              });
-            },
-            trailing: Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: showLargeSizeLayout
-                    ? _expandedTrailingActions()
-                    : _trailingActions(),
+    return ChangeNotifierProvider(
+      create: (context) => DatabaseState(),
+      child: AnimatedBuilder(
+        animation: controller,
+        builder: (context, child) {
+          return Consumer<DatabaseState>(
+            builder: (context, state, child) => NavigationTransition(
+              scaffoldKey: scaffoldKey,
+              animationController: controller,
+              railAnimation: railAnimation,
+              appBar: createAppBar(),
+              body: createScreenFor(
+                ScreenSelected.values[state.screenIndex],
+                controller.value == 1,
+              ),
+              navigationRail: NavigationRail(
+                extended: showLargeSizeLayout,
+                destinations: navRailDestinations,
+                selectedIndex: state.screenIndex,
+                onDestinationSelected: (index) {
+                  state.changeScreen(index);
+                },
+                trailing: Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: showLargeSizeLayout
+                        ? _expandedTrailingActions()
+                        : _trailingActions(),
+                  ),
+                ),
+              ),
+              navigationBar: NavigationBars(
+                onSelectItem: (index) {
+                  state.changeScreen(index);
+                },
+                selectedIndex: state.screenIndex,
+                isExampleBar: false,
               ),
             ),
-          ),
-          navigationBar: NavigationBars(
-            onSelectItem: (index) {
-              setState(() {
-                screenIndex = index;
-                handleScreenChanged(screenIndex);
-              });
-            },
-            selectedIndex: screenIndex,
-            isExampleBar: false,
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

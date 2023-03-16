@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gmat_coach/menu.dart';
 
 const rowDivider = SizedBox(width: 20);
 const colDivider = SizedBox(height: 10);
@@ -935,39 +936,6 @@ class _ProgressIndicatorsState extends State<ProgressIndicators> {
     );
   }
 }
-
-const List<NavigationDestination> appBarDestinations = [
-  NavigationDestination(
-    tooltip: '',
-    icon: Icon(Icons.widgets_outlined),
-    label: 'Components',
-    selectedIcon: Icon(Icons.widgets),
-  ),
-  NavigationDestination(
-    tooltip: '',
-    icon: Icon(Icons.format_paint_outlined),
-    label: 'Color',
-    selectedIcon: Icon(Icons.format_paint),
-  ),
-  NavigationDestination(
-    tooltip: '',
-    icon: Icon(Icons.text_snippet_outlined),
-    label: 'Typography',
-    selectedIcon: Icon(Icons.text_snippet),
-  ),
-  NavigationDestination(
-    tooltip: '',
-    icon: Icon(Icons.invert_colors_on_outlined),
-    label: 'Elevation',
-    selectedIcon: Icon(Icons.opacity),
-  ),
-  NavigationDestination(
-    tooltip: '',
-    icon: Icon(Icons.question_mark_outlined),
-    label: 'Question',
-    selectedIcon: Icon(Icons.question_mark_rounded),
-  )
-];
 
 const List<Widget> exampleBarDestinations = [
   NavigationDestination(

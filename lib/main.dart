@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'constants.dart';
-import 'home.dart';
+import 'layouts/home.dart';
 
 void main() {
   runApp(
