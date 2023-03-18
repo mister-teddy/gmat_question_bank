@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:gmat_coach/constants.dart';
-import 'package:gmat_coach/models/database.dart';
+import 'package:open_gmat_database/constants.dart';
+import 'package:open_gmat_database/models/database.dart';
 import 'package:http/http.dart' as http;
 
 class DatabaseState extends ChangeNotifier {

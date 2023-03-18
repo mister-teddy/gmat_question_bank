@@ -1,4 +1,4 @@
-package com.example.gmat_coach
+package com.example.open_gmat_database
 
 import io.flutter.embedding.android.FlutterActivity
 

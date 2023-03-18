@@ -5,13 +5,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:gmat_coach/constants.dart';
-import 'package:gmat_coach/widgets/component_screen.dart';
-import 'package:gmat_coach/state.dart';
+import 'package:open_gmat_database/constants.dart';
+import 'package:open_gmat_database/widgets/component_screen.dart';
+import 'package:open_gmat_database/state.dart';
 import 'package:provider/provider.dart';
-import 'package:gmat_coach/layouts/home.dart';
-import 'package:gmat_coach/models/question.dart';
-import 'package:gmat_coach/widgets/rich_content.dart';
+import 'package:open_gmat_database/layouts/home.dart';
+import 'package:open_gmat_database/models/question.dart';
+import 'package:open_gmat_database/widgets/rich_content.dart';
 import 'package:http/http.dart' as http;
 
 class QuestionScreen extends StatelessWidget {

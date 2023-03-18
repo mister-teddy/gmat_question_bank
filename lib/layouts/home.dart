@@ -3,10 +3,10 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:gmat_coach/menu.dart';
-import 'package:gmat_coach/state.dart';
+import 'package:open_gmat_database/menu.dart';
+import 'package:open_gmat_database/state.dart';
 import 'package:provider/provider.dart';
-import 'package:gmat_coach/layouts/question.dart';
+import 'package:open_gmat_database/layouts/question.dart';
 
 import '../widgets/component_screen.dart';
 import '../constants.dart';
@@ -105,7 +105,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   PreferredSizeWidget createAppBar() {
     return AppBar(
-      title: Text("GMAT Coach"),
+      title: Text("Open GMAT Database"),
       actions: !showMediumSizeLayout && !showLargeSizeLayout
           ? [
               _BrightnessButton(

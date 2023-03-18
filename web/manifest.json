@@ -1,6 +1,6 @@
 {
-  "name": "gmat_coach",
-  "short_name": "gmat_coach",
+  "name": "open_gmat_database",
+  "short_name": "open_gmat_database",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",
