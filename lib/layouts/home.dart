@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:open_gmat_database/menu.dart';
 import 'package:open_gmat_database/state.dart';
 import 'package:open_gmat_database/widgets/chatgpt_button.dart';
+import 'package:open_gmat_database/widgets/count_up.dart';
 import 'package:open_gmat_database/widgets/google_translate_button.dart';
 import 'package:open_gmat_database/widgets/grammarly_button.dart';
 import 'package:provider/provider.dart';
@@ -107,7 +108,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   PreferredSizeWidget createAppBar() {
     return AppBar(
-      title: Text("Open GMAT Database"),
+      title: Consumer<DatabaseState>(
+        builder: (context, value, child) => CountupTimer(
+            key: Key(value.questionsByCategory[value.selectedQuestionIndex])),
+      ),
       actions: !showMediumSizeLayout && !showLargeSizeLayout
           ? [
               _BrightnessButton(
