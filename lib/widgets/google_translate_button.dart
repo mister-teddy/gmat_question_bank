@@ -14,8 +14,8 @@ class GoogleTranslateButton extends StatelessWidget {
           onPressed: () async {
             final text = value.questionContent;
             if (text != null) {
-              final googleTranslateUrl = Uri.parse(
-                  "googletranslate://translate.google.com/?text=$text");
+              final googleTranslateUrl =
+                  Uri.parse("googletranslate://?sl=en&tl=vi&text=$text");
               final fallbackUrl =
                   Uri.parse("https://translate.google.com/?text=$text");
               if (await canLaunchUrl(googleTranslateUrl)) {

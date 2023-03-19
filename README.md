@@ -1,41 +1,47 @@
 # Open GMAT Database
 
-This sample Flutter app showcases Material 3 features in the Flutter Material library. These features include updated components, typography, color system and elevation support. The app supports light and dark themes, different color palettes, as well as the ability to switch between Material 2 and Material 3. For more information about Material 3, the guidance is now live at https://m3.material.io/.
+Open GMAT Database is a client for the [GMAT Database](https://github.com/nguyenhongphat0/gmat-database) project, designed to provide users with a wide range of GMAT practice questions to help them prepare for the GMAT exam. This app supports Material You design principles, allowing users to customize the app's appearance to their liking.
 
-This app also includes new M3 components such as IconButtons, Chips, TextFields, Switches, Checkboxes, Radio buttons and ProgressIndicators.
+## Preview
 
-# Preview
+<img width="400" alt="Screen Shot 2022-08-12 at 12 00 28 PM" src="./docs/demo/latex.png"><img width="400" alt="Screen Shot 2022-08-12 at 12 00 38 PM" src="./docs/demo/reading.png">
 
-<img width="400" alt="Screen Shot 2022-08-12 at 12 00 28 PM" src="https://user-images.githubusercontent.com/36861262/184426137-47b550e1-5c6e-4bb7-b647-b1741f96d42b.png"><img width="400" alt="Screen Shot 2022-08-12 at 12 00 38 PM" src="https://user-images.githubusercontent.com/36861262/184426154-063a39e8-24bd-40be-90cd-984bf81c0fdf.png">
+## Features
 
-# Features
+### View Questions
 
-## Icon Buttons on the Top App Bar
+Users can access a vast collection of GMAT practice questions on this app by navigating through various categories and sub-categories. Each question is presented in a clear and easy-to-read format, making it easy for users to understand the question and attempt it.
 
-<img src="https://user-images.githubusercontent.com/36861262/166506048-125caeb3-5d5c-4489-9029-1cb74202dd37.png" width="25"/> Users can switch between a light or dark theme with this button.
+### Different Question Types
 
-<img src="https://user-images.githubusercontent.com/36861262/166508002-90fce980-d228-4312-a95f-a1919bb79ccc.png" width="25" /> Users can switch between Material 2 and Material 3 for the displayed components with this button.
+Open GMAT Database supports five different types of questions: Quantitative Comparison, Data Sufficiency, Problem Solving, Sentence Correction, and Critical Reasoning. Users can select the question type they want to practice and filter the questions based on their difficulty level.
 
-<img src="https://user-images.githubusercontent.com/36861262/166511137-85dea8df-0017-4649-b913-14d4b7a17c2f.png" width="25" /> This button will bring up a pop-up menu that allows the user to change the base color used for the light and dark themes. This uses a new color seed feature to generate entire color schemes from a single color.
+### Explanations
 
-## Component Screen
+For each question, the app provides a detailed explanation of the solution, helping users understand the concepts involved and learn from their mistakes. The explanations are provided in an easy-to-understand language and include step-by-step solutions.
 
-The default screen displays all the updated components in Material 3: AppBar, common Buttons, Floating Action Button(FAB), Chips, Card, Checkbox, Dialog, NavigationBar, NavigationRail, ProgressIndicators, Radio buttons, TextFields and Switch.
+### Timing
 
-### Adaptive Layout
+Open GMAT Database also includes a timer feature, allowing users to time their attempts and track their progress. Users can set the time limit for each question or practice set and try to complete it within the specified time. This feature helps users manage their time effectively during the GMAT exam and improve their speed and accuracy.
 
-Based on the fact that NavigationRail is not recommended on a small screen, the app changes its layout based on the screen width. If it's played on iOS or Android devices which have a narrow screen, a Navigation Bar will show at the bottom and will be used to navigate. But if it's played as a desktop or a web app, a Navigation Rail will show on the left side and at the same time, a Navigation Bar will show as an example but will not have any functionality.
+### Material You
 
-Users can see both layouts on one device by running a desktop app and adjusting the screen width.
+The app supports Material You design principles, allowing users to customize the app's appearance by choosing from a range of color schemes and themes. Users can select a primary color and the app will generate a color palette based on that color, providing a unique and personalized experience.
 
-## Color Screen
+## Usage
 
-With Material 3, we have added support for generating a full color scheme from a single seed color. The Color Screen shows users all of the colors in light and dark color palettes that are generated from the currently selected color.
+1. Clone the repository
+2. Install Flutter by following the official documentation for your platform: https://flutter.dev/docs/get-started/install
+3. Build and run the app by following the official documentation for your platform: https://flutter.dev/multi-platform
 
-## Typography Screen
+Example for running the app on Android:
 
-The Typography Screen displays the text styles used in for the default TextTheme.
+```bash
+flutter run -d <device-id>
+```
 
-## Elevation Screen
+Replace <device-id> with the ID of the connected Android device or emulator. You can find the ID by running `flutter devices`.
 
-The Elevation screen shows different ways of elevation with a new supported feature "surfaceTintColor" in the Material library.
+# License
+
+This project is licensed under the MIT License.

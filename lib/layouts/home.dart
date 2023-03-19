@@ -126,6 +126,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     questionId:
                         value.questionsByCategory[value.selectedQuestionIndex],
                   ),
+                  SizedBox(width: 8),
                   MarkCompleted(
                     questionId:
                         value.questionsByCategory[value.selectedQuestionIndex],
