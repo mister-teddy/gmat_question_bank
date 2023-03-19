@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:html/parser.dart';
 import 'package:open_gmat_database/constants.dart';
 import 'package:open_gmat_database/models/database.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +12,7 @@ class DatabaseState extends ChangeNotifier {
   Database? database;
   int selectedQuestionIndex = 0;
   int screenIndex = ScreenSelected.ds.value;
+  String? questionContent;
 
   DatabaseState() {
     _init();
@@ -51,5 +54,13 @@ class DatabaseState extends ChangeNotifier {
       }
     }
     return [];
+  }
+
+  void setQuestionContent(String content) {
+    final document =
+        parse(content.replaceAll('<br><br>', '<br>').replaceAll('<br>', '\n'));
+    final String textContent = parse(document.body!.text).documentElement!.text;
+    this.questionContent = textContent;
+    Clipboard.setData(ClipboardData(text: textContent));
   }
 }

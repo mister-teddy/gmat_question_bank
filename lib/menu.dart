@@ -4,32 +4,32 @@ import 'package:open_gmat_database/constants.dart';
 final List<NavigationDestination> appBarDestinations = [
   NavigationDestination(
     tooltip: '',
-    icon: Icon(Icons.widgets_outlined),
+    icon: Icon(Icons.join_inner),
     label: CategoryNames.ds.value,
-    selectedIcon: Icon(Icons.widgets),
+    selectedIcon: Icon(Icons.join_full),
   ),
   NavigationDestination(
     tooltip: '',
-    icon: Icon(Icons.format_paint_outlined),
+    icon: Icon(Icons.calculate_outlined),
     label: CategoryNames.ps.value,
-    selectedIcon: Icon(Icons.format_paint),
+    selectedIcon: Icon(Icons.calculate),
   ),
   NavigationDestination(
     tooltip: '',
-    icon: Icon(Icons.text_snippet_outlined),
+    icon: Icon(Icons.lightbulb_outline),
     label: CategoryNames.cr.value,
-    selectedIcon: Icon(Icons.text_snippet),
+    selectedIcon: Icon(Icons.lightbulb),
   ),
   NavigationDestination(
     tooltip: '',
-    icon: Icon(Icons.invert_colors_on_outlined),
+    icon: Icon(Icons.strikethrough_s_rounded),
     label: CategoryNames.sc.value,
-    selectedIcon: Icon(Icons.opacity),
+    selectedIcon: Icon(Icons.strikethrough_s),
   ),
   NavigationDestination(
     tooltip: '',
-    icon: Icon(Icons.question_mark_outlined),
+    icon: Icon(Icons.book_outlined),
     label: CategoryNames.rc.value,
-    selectedIcon: Icon(Icons.question_mark_rounded),
+    selectedIcon: Icon(Icons.book),
   )
 ];

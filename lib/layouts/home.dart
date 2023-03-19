@@ -5,8 +5,12 @@
 import 'package:flutter/material.dart';
 import 'package:open_gmat_database/menu.dart';
 import 'package:open_gmat_database/state.dart';
+import 'package:open_gmat_database/widgets/chatgpt_button.dart';
+import 'package:open_gmat_database/widgets/google_translate_button.dart';
+import 'package:open_gmat_database/widgets/grammarly_button.dart';
 import 'package:provider/provider.dart';
 import 'package:open_gmat_database/layouts/question.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/component_screen.dart';
 import '../constants.dart';
@@ -18,7 +22,6 @@ class Home extends StatefulWidget {
     required this.useMaterial3,
     required this.colorSelected,
     required this.handleBrightnessChange,
-    required this.handleMaterialVersionChange,
     required this.handleColorSelect,
   });
 
@@ -26,7 +29,6 @@ class Home extends StatefulWidget {
   final bool useMaterial3;
   final ColorSeed colorSelected;
   final void Function(bool useLightMode) handleBrightnessChange;
-  final void Function() handleMaterialVersionChange;
   final void Function(int value) handleColorSelect;
 
   @override
@@ -111,9 +113,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               _BrightnessButton(
                 handleBrightnessChange: widget.handleBrightnessChange,
               ),
-              _Material3Button(
-                handleMaterialVersionChange: widget.handleMaterialVersionChange,
-              ),
+              GoogleTranslateButton(),
+              GrammarlyButton(),
+              ChatGPTButton(),
               _ColorSeedButton(
                 handleColorSelect: widget.handleColorSelect,
                 colorSelected: widget.colorSelected,
@@ -138,19 +140,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     value: widget.useLightMode,
                     onChanged: (value) {
                       widget.handleBrightnessChange(value);
-                    })
-              ],
-            ),
-            Row(
-              children: [
-                widget.useMaterial3
-                    ? const Text('Material 3')
-                    : const Text('Material 2'),
-                Expanded(child: Container()),
-                Switch(
-                    value: widget.useMaterial3,
-                    onChanged: (_) {
-                      widget.handleMaterialVersionChange();
                     })
               ],
             ),
@@ -187,10 +176,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
           ),
           Flexible(
-            child: _Material3Button(
-              handleMaterialVersionChange: widget.handleMaterialVersionChange,
-              showTooltipBelow: false,
-            ),
+            child: GoogleTranslateButton(),
+          ),
+          Flexible(
+            child: GrammarlyButton(),
+          ),
+          Flexible(
+            child: ChatGPTButton(),
           ),
           Flexible(
             child: _ColorSeedButton(
@@ -269,31 +261,6 @@ class _BrightnessButton extends StatelessWidget {
             ? const Icon(Icons.dark_mode_outlined)
             : const Icon(Icons.light_mode_outlined),
         onPressed: () => handleBrightnessChange(!isBright),
-      ),
-    );
-  }
-}
-
-class _Material3Button extends StatelessWidget {
-  const _Material3Button({
-    required this.handleMaterialVersionChange,
-    this.showTooltipBelow = true,
-  });
-
-  final void Function() handleMaterialVersionChange;
-  final bool showTooltipBelow;
-
-  @override
-  Widget build(BuildContext context) {
-    final useMaterial3 = Theme.of(context).useMaterial3;
-    return Tooltip(
-      preferBelow: showTooltipBelow,
-      message: 'Switch to Material ${useMaterial3 ? 2 : 3}',
-      child: IconButton(
-        icon: useMaterial3
-            ? const Icon(Icons.filter_2)
-            : const Icon(Icons.filter_3),
-        onPressed: handleMaterialVersionChange,
       ),
     );
   }

@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:open_gmat_database/layouts/home.dart';
+import 'package:open_gmat_database/state.dart';
 import 'package:open_gmat_database/widgets/component_screen.dart';
 import 'package:open_gmat_database/widgets/rich_content.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import '../models/question.dart';
 
 class QuestionDetail extends StatefulWidget {
@@ -31,83 +33,86 @@ class _QuestionDetailState extends State<QuestionDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: widget._future,
-      builder: (BuildContext context, AsyncSnapshot<Question> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
-        } else {
-          final question = snapshot.data!;
-          return Container(
-            child: OneTwoTransition(
-              animation: widget.railAnimation,
-              one: FocusTraversalGroup(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                    child: Column(
-                      children: [
-                        RichContent(question.question),
-                        if (question.answers != null)
-                          ListAnswer(answers: question.answers!),
-                        if (question.subQuestions != null)
-                          Column(
-                            children: List.generate(
-                              question.subQuestions!.length,
-                              (index) => Column(
-                                children: [
-                                  RichContent(
-                                      question.subQuestions![index].question),
-                                  ListAnswer(
-                                      answers: question
-                                          .subQuestions![index].answers!),
-                                ],
+    return Consumer<DatabaseState>(
+      builder: (context, value, child) => FutureBuilder(
+        future: widget._future,
+        builder: (BuildContext context, AsyncSnapshot<Question> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            final question = snapshot.data!;
+            value.setQuestionContent(question.question);
+            return Container(
+              child: OneTwoTransition(
+                animation: widget.railAnimation,
+                one: FocusTraversalGroup(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: Column(
+                        children: [
+                          RichContent(question.question),
+                          if (question.answers != null)
+                            ListAnswer(answers: question.answers!),
+                          if (question.subQuestions != null)
+                            Column(
+                              children: List.generate(
+                                question.subQuestions!.length,
+                                (index) => Column(
+                                  children: [
+                                    RichContent(
+                                        question.subQuestions![index].question),
+                                    ListAnswer(
+                                        answers: question
+                                            .subQuestions![index].answers),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              two: FocusTraversalGroup(
-                child: showExplanations
-                    ? ListView.builder(
-                        padding:
-                            const EdgeInsetsDirectional.only(end: smallSpacing),
-                        itemCount: snapshot.data!.explanations.length,
-                        itemBuilder: (context, index) {
-                          final item = ComponentGroupDecoration(children: [
-                            RichContent(snapshot.data!.explanations[index])
-                          ]);
-                          if (index == 0) {
-                            return item;
-                          } else {
-                            return Column(
-                              children: [colDivider, item],
-                            );
-                          }
-                        })
-                    : Card(
-                        child: Center(
-                          child: FloatingActionButton.extended(
-                            onPressed: () {
-                              setState(() {
-                                showExplanations = true;
-                              });
-                            },
-                            label: Text("Show explanations"),
-                            icon: Icon(Icons.reviews),
+                two: FocusTraversalGroup(
+                  child: showExplanations
+                      ? ListView.builder(
+                          padding: const EdgeInsetsDirectional.only(
+                              end: smallSpacing),
+                          itemCount: snapshot.data!.explanations.length,
+                          itemBuilder: (context, index) {
+                            final item = ComponentGroupDecoration(children: [
+                              RichContent(snapshot.data!.explanations[index])
+                            ]);
+                            if (index == 0) {
+                              return item;
+                            } else {
+                              return Column(
+                                children: [colDivider, item],
+                              );
+                            }
+                          })
+                      : Card(
+                          child: Center(
+                            child: FloatingActionButton.extended(
+                              onPressed: () {
+                                setState(() {
+                                  showExplanations = true;
+                                });
+                              },
+                              label: Text("Show explanations"),
+                              icon: Icon(Icons.reviews),
+                            ),
                           ),
                         ),
-                      ),
+                ),
               ),
-            ),
-          );
-        }
-      },
+            );
+          }
+        },
+      ),
     );
   }
 }
