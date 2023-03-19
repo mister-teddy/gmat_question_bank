@@ -113,23 +113,26 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return AppBar(
       title: Consumer<DatabaseState>(
         builder: (context, value, child) => value.questionsByCategory.length > 0
-            ? Row(
+            ? Stack(
                 children: [
-                  Expanded(
-                    child: Center(
-                      child: CountupTimer(
-                          key: Key(value.questionsByCategory[
-                              value.selectedQuestionIndex])),
-                    ),
+                  Center(
+                    child: CountupTimer(
+                        key: Key(value
+                            .questionsByCategory[value.selectedQuestionIndex])),
                   ),
-                  FlagQuestion(
-                    questionId:
-                        value.questionsByCategory[value.selectedQuestionIndex],
-                  ),
-                  SizedBox(width: 8),
-                  MarkCompleted(
-                    questionId:
-                        value.questionsByCategory[value.selectedQuestionIndex],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      FlagQuestion(
+                        questionId: value
+                            .questionsByCategory[value.selectedQuestionIndex],
+                      ),
+                      SizedBox(width: 8),
+                      MarkCompleted(
+                        questionId: value
+                            .questionsByCategory[value.selectedQuestionIndex],
+                      )
+                    ],
                   )
                 ],
               )

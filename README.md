@@ -4,7 +4,8 @@ Open GMAT Database is a client for the [GMAT Database](https://github.com/nguyen
 
 ## Preview
 
-<img width="400" alt="Screen Shot 2022-08-12 at 12 00 28 PM" src="./docs/demo/latex.png"><img width="400" alt="Screen Shot 2022-08-12 at 12 00 38 PM" src="./docs/demo/reading.png">
+![Dark](./docs/demo/latex.png)
+![Light](./docs/demo/reading.png)
 
 ## Features
 
