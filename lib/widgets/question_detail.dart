@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:open_gmat_database/layouts/home.dart';
-import 'package:open_gmat_database/state.dart';
+import 'package:open_gmat_database/state/database.dart';
 import 'package:open_gmat_database/widgets/component_screen.dart';
 import 'package:open_gmat_database/widgets/rich_content.dart';
 import 'package:http/http.dart' as http;
@@ -34,7 +34,7 @@ class _QuestionDetailState extends State<QuestionDetail> {
   @override
   Widget build(BuildContext context) {
     return Consumer<DatabaseState>(
-      builder: (context, value, child) => FutureBuilder(
+      builder: (context, state, child) => FutureBuilder(
         future: widget._future,
         builder: (BuildContext context, AsyncSnapshot<Question> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -43,7 +43,7 @@ class _QuestionDetailState extends State<QuestionDetail> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             final question = snapshot.data!;
-            value.setQuestionContent(question.question);
+            state.setQuestionContent(question);
             return Container(
               child: OneTwoTransition(
                 animation: widget.railAnimation,
@@ -95,6 +95,11 @@ class _QuestionDetailState extends State<QuestionDetail> {
                             }
                           })
                       : Card(
+                          margin: EdgeInsets.all(0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(16.0),
+                                  bottomLeft: Radius.circular(16.0))),
                           child: Center(
                             child: FloatingActionButton.extended(
                               onPressed: () {
@@ -102,7 +107,8 @@ class _QuestionDetailState extends State<QuestionDetail> {
                                   showExplanations = true;
                                 });
                               },
-                              label: Text("Show explanations"),
+                              label: Text(
+                                  "Show ${question.explanations.length} explanation${question.explanations.length > 1 ? 's' : ''}"),
                               icon: Icon(Icons.reviews),
                             ),
                           ),

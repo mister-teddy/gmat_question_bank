@@ -4,7 +4,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:open_gmat_database/constants.dart';
-import 'package:open_gmat_database/state.dart';
+import 'package:open_gmat_database/state/database.dart';
+import 'package:open_gmat_database/state/preferences.dart';
 import 'package:open_gmat_database/widgets/question_detail.dart';
 import 'package:provider/provider.dart';
 
@@ -49,26 +50,45 @@ class Sidebar extends StatelessWidget {
     return Consumer<DatabaseState>(
       builder: (context, state, child) {
         if (state.database != null) {
-          return NavigationDrawer(
-            selectedIndex: state.selectedQuestionIndex,
-            onDestinationSelected: (value) => state.selectQuestion(value),
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
-                child: Text(
-                  CategoryNames
-                      .values[ScreenSelected.values[state.screenIndex].value]
-                      .value,
-                  style: Theme.of(context).textTheme.titleSmall,
+          return Consumer<PreferencesState>(
+              builder: (context, prefState, child) {
+            return NavigationDrawer(
+              selectedIndex: state.selectedQuestionIndex,
+              onDestinationSelected: (value) => state.selectQuestion(value),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
+                  child: Text(
+                    CategoryNames
+                        .values[ScreenSelected.values[state.screenIndex].value]
+                        .value,
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
                 ),
-              ),
-              ...state.questionsByCategory
-                  .map((id) => NavigationDrawerDestination(
-                        label: Text(id),
-                        icon: Icon(Icons.abc),
-                      ))
-            ],
-          );
+                ...state.questionsByCategory.map(
+                  (id) => NavigationDrawerDestination(
+                    label: Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(id),
+                          if (prefState.isFlagged(id))
+                            Expanded(
+                                child: Icon(
+                              Icons.flag,
+                              size: 16.0,
+                            ))
+                        ],
+                      ),
+                    ),
+                    icon: Icon(prefState.isCompleted(id)
+                        ? Icons.rocket_launch
+                        : Icons.abc),
+                  ),
+                )
+              ],
+            );
+          });
         } else {
           return Center(child: CircularProgressIndicator());
         }

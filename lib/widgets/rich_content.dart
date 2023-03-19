@@ -36,7 +36,10 @@ class RichContent extends StatelessWidget {
               final part = parts[index].trim();
 
               if (part.startsWith(r"\(") && part.endsWith(r"\)")) {
-                final latex = part.substring(2, part.length - 2);
+                final latex = part
+                    .substring(2, part.length - 2)
+                    .replaceAll('&lt;', '<')
+                    .replaceAll('&gt;', '>');
 
                 return WidgetSpan(child: CaTeX(latex));
               } else {

@@ -14,7 +14,7 @@ const double largeWidthBreakpoint = 1500;
 const double transitionLength = 500;
 
 enum ColorSeed {
-  baseColor('M3 Baseline', Color(0xff6750a4)),
+  baseColor('Default', Colors.white),
   indigo('Indigo', Colors.indigo),
   blue('Blue', Colors.blue),
   teal('Teal', Colors.teal),
@@ -22,7 +22,8 @@ enum ColorSeed {
   yellow('Yellow', Colors.yellow),
   orange('Orange', Colors.orange),
   deepOrange('Deep Orange', Colors.deepOrange),
-  pink('Pink', Colors.pink);
+  pink('Pink', Colors.pink),
+  red('Purple', Color(0xff6750a4));
 
   const ColorSeed(this.label, this.color);
   final String label;

@@ -4,14 +4,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:open_gmat_database/menu.dart';
-import 'package:open_gmat_database/state.dart';
+import 'package:open_gmat_database/state/database.dart';
+import 'package:open_gmat_database/state/preferences.dart';
 import 'package:open_gmat_database/widgets/chatgpt_button.dart';
 import 'package:open_gmat_database/widgets/count_up.dart';
+import 'package:open_gmat_database/widgets/flag_question.dart';
 import 'package:open_gmat_database/widgets/google_translate_button.dart';
 import 'package:open_gmat_database/widgets/grammarly_button.dart';
+import 'package:open_gmat_database/widgets/mark_completed.dart';
+import 'package:open_gmat_database/widgets/view_question_source.dart';
 import 'package:provider/provider.dart';
 import 'package:open_gmat_database/layouts/question.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/component_screen.dart';
 import '../constants.dart';
@@ -109,14 +112,34 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   PreferredSizeWidget createAppBar() {
     return AppBar(
       title: Consumer<DatabaseState>(
-        builder: (context, value, child) => CountupTimer(
-            key: Key(value.questionsByCategory[value.selectedQuestionIndex])),
+        builder: (context, value, child) => value.questionsByCategory.length > 0
+            ? Row(
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: CountupTimer(
+                          key: Key(value.questionsByCategory[
+                              value.selectedQuestionIndex])),
+                    ),
+                  ),
+                  FlagQuestion(
+                    questionId:
+                        value.questionsByCategory[value.selectedQuestionIndex],
+                  ),
+                  MarkCompleted(
+                    questionId:
+                        value.questionsByCategory[value.selectedQuestionIndex],
+                  )
+                ],
+              )
+            : Row(),
       ),
       actions: !showMediumSizeLayout && !showLargeSizeLayout
           ? [
               _BrightnessButton(
                 handleBrightnessChange: widget.handleBrightnessChange,
               ),
+              ViewQuestionSource(),
               GoogleTranslateButton(),
               GrammarlyButton(),
               ChatGPTButton(),
@@ -180,6 +203,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
           ),
           Flexible(
+            child: ViewQuestionSource(),
+          ),
+          Flexible(
             child: GoogleTranslateButton(),
           ),
           Flexible(
@@ -199,8 +225,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => DatabaseState(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => DatabaseState()),
+        ChangeNotifierProvider(create: (context) => PreferencesState()),
+      ],
       child: AnimatedBuilder(
         animation: controller,
         builder: (context, child) {
