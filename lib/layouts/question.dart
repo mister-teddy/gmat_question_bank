@@ -2,17 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:open_gmat_database/constants.dart';
-import 'package:open_gmat_database/widgets/component_screen.dart';
 import 'package:open_gmat_database/state.dart';
+import 'package:open_gmat_database/widgets/question_detail.dart';
 import 'package:provider/provider.dart';
-import 'package:open_gmat_database/layouts/home.dart';
-import 'package:open_gmat_database/models/question.dart';
-import 'package:open_gmat_database/widgets/rich_content.dart';
-import 'package:http/http.dart' as http;
 
 class QuestionScreen extends StatelessWidget {
   QuestionScreen({
@@ -34,72 +28,14 @@ class QuestionScreen extends StatelessWidget {
             builder: (context, state, child) => state.database == null
                 ? SizedBox.shrink()
                 : QuestionDetail(
+                    key: Key(
+                        state.questionsByCategory[state.selectedQuestionIndex]),
                     railAnimation: railAnimation,
                     questionId:
                         state.questionsByCategory[state.selectedQuestionIndex],
                   )),
       )
     ]));
-  }
-}
-
-class QuestionDetail extends StatelessWidget {
-  QuestionDetail({
-    super.key,
-    required this.railAnimation,
-    required this.questionId,
-  }) : _future = http
-            .get(Uri.parse(
-                'https://nguyenhongphat0.github.io/gmat-database/$questionId.json'))
-            .then((value) => Question.fromJson(jsonDecode(value.body)));
-
-  final String questionId;
-  late final Future<Question> _future;
-  late final Future<Question> _anotherfuture;
-
-  final CurvedAnimation railAnimation;
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _future,
-      builder: (BuildContext context, AsyncSnapshot<Question> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
-        } else {
-          return Container(
-              child: OneTwoTransition(
-            animation: railAnimation,
-            one: FocusTraversalGroup(
-              child: SingleChildScrollView(
-                child: RichContent(snapshot.data!.question),
-              ),
-            ),
-            two: FocusTraversalGroup(
-                child: ListView.builder(
-                    padding:
-                        const EdgeInsetsDirectional.only(end: smallSpacing),
-                    itemCount: snapshot.data!.explanations.length,
-                    itemBuilder: (context, index) {
-                      final item = ComponentGroupDecoration(
-                          label: "Explanations",
-                          children: [
-                            RichContent(snapshot.data!.explanations[index])
-                          ]);
-                      if (index == 0) {
-                        return item;
-                      } else {
-                        return Column(
-                          children: [colDivider, item],
-                        );
-                      }
-                    })),
-          ));
-        }
-      },
-    );
   }
 }
 

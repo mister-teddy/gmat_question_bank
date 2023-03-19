@@ -2251,9 +2251,9 @@ class _ComponentDecorationState extends State<ComponentDecoration> {
 
 class ComponentGroupDecoration extends StatelessWidget {
   const ComponentGroupDecoration(
-      {super.key, required this.label, required this.children});
+      {super.key, this.label, required this.children});
 
-  final String label;
+  final String? label;
   final List<Widget> children;
 
   @override
@@ -2265,12 +2265,12 @@ class ComponentGroupDecoration extends StatelessWidget {
         elevation: 0,
         color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          padding: const EdgeInsets.all(8.0),
           child: Center(
             child: Column(
               children: [
-                Text(label, style: Theme.of(context).textTheme.titleLarge),
-                colDivider,
+                if (label != null)
+                  Text(label!, style: Theme.of(context).textTheme.titleLarge),
                 ...children
               ],
             ),
