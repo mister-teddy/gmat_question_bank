@@ -9,21 +9,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'constants.dart';
 import 'layouts/home.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final prefs = await SharedPreferences.getInstance();
-  final selectedTheme = prefs.getInt("selectedTheme") ?? 0;
+void main() {
   runApp(
-    App(
-      selectedTheme: selectedTheme,
-    ),
+    const App(),
   );
 }
 
 class App extends StatefulWidget {
-  const App({super.key, required this.selectedTheme});
-
-  final int selectedTheme;
+  const App({super.key});
 
   @override
   State<App> createState() => _AppState();
@@ -31,11 +24,15 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   ThemeMode themeMode = ThemeMode.system;
-  late ColorSeed colorSelected;
+  ColorSeed colorSelected = ColorSeed.baseColor;
 
   @override
   void initState() {
-    this.colorSelected = ColorSeed.values[widget.selectedTheme];
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() {
+        colorSelected = ColorSeed.values[prefs.getInt("selectedTheme") ?? 0];
+      });
+    });
     super.initState();
   }
 
