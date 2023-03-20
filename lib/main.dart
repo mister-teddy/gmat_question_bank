@@ -4,18 +4,26 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants.dart';
 import 'layouts/home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final selectedTheme = prefs.getInt("selectedTheme") ?? 0;
   runApp(
-    const App(),
+    App(
+      selectedTheme: selectedTheme,
+    ),
   );
 }
 
 class App extends StatefulWidget {
-  const App({super.key});
+  const App({super.key, required this.selectedTheme});
+
+  final int selectedTheme;
 
   @override
   State<App> createState() => _AppState();
@@ -23,7 +31,13 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   ThemeMode themeMode = ThemeMode.system;
-  ColorSeed colorSelected = ColorSeed.baseColor;
+  late ColorSeed colorSelected;
+
+  @override
+  void initState() {
+    this.colorSelected = ColorSeed.values[widget.selectedTheme];
+    super.initState();
+  }
 
   bool get useLightMode {
     switch (themeMode) {
@@ -43,10 +57,12 @@ class _AppState extends State<App> {
     });
   }
 
-  void handleColorSelect(int value) {
+  void handleColorSelect(int value) async {
     setState(() {
       colorSelected = ColorSeed.values[value];
     });
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt("selectedTheme", value);
   }
 
   @override
