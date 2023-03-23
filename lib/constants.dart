@@ -20,7 +20,7 @@ enum ColorSeed {
   teal('Teal', Colors.teal),
   green('Green', Colors.green),
   yellow('Yellow', Colors.yellow),
-  orange('Orange', Colors.orange),
+  orange('Orange', Colors.deepOrange),
   deepOrange('Red', Colors.red),
   pink('Pink', Colors.pink),
   red('Purple', Color(0xff6750a4));

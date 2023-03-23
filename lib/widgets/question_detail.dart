@@ -14,6 +14,7 @@ class QuestionDetail extends StatefulWidget {
     super.key,
     required this.railAnimation,
     required this.questionId,
+    required this.showSecondList,
   }) : _future = http
             .get(Uri.parse(
                 'https://nguyenhongphat0.github.io/gmat-database/$questionId.json'))
@@ -22,6 +23,7 @@ class QuestionDetail extends StatefulWidget {
   final String questionId;
   late final Future<Question> _future;
   final CurvedAnimation railAnimation;
+  final bool showSecondList;
 
   @override
   State<QuestionDetail> createState() => _QuestionDetailState();
@@ -71,6 +73,39 @@ class _QuestionDetailState extends State<QuestionDetail> {
                                 ),
                               ),
                             ),
+                          if (!widget.showSecondList)
+                            Container(
+                              margin: const EdgeInsets.all(8.0),
+                              child: FloatingActionButton.extended(
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    builder: (context) => Stack(
+                                      children: [
+                                        ExplanationList(
+                                            question: snapshot.data!),
+                                        Align(
+                                          alignment: Alignment.topRight,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: IconButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              icon: Icon(Icons.close),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                },
+                                label: Text(
+                                    "Show ${question.explanations.length} explanation${question.explanations.length > 1 ? 's' : ''}"),
+                                icon: Icon(Icons.reviews),
+                              ),
+                            ),
                         ],
                       ),
                     ),
@@ -78,22 +113,9 @@ class _QuestionDetailState extends State<QuestionDetail> {
                 ),
                 two: FocusTraversalGroup(
                   child: showExplanations
-                      ? ListView.builder(
-                          padding: const EdgeInsetsDirectional.only(
-                              end: smallSpacing),
-                          itemCount: snapshot.data!.explanations.length,
-                          itemBuilder: (context, index) {
-                            final item = ComponentGroupDecoration(children: [
-                              RichContent(snapshot.data!.explanations[index])
-                            ]);
-                            if (index == 0) {
-                              return item;
-                            } else {
-                              return Column(
-                                children: [colDivider, item],
-                              );
-                            }
-                          })
+                      ? ExplanationList(
+                          question: snapshot.data!,
+                        )
                       : Card(
                           margin: EdgeInsets.all(0),
                           shape: RoundedRectangleBorder(
@@ -120,6 +142,29 @@ class _QuestionDetailState extends State<QuestionDetail> {
         },
       ),
     );
+  }
+}
+
+class ExplanationList extends StatelessWidget {
+  const ExplanationList({super.key, required this.question});
+  final Question question;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        padding: const EdgeInsetsDirectional.only(end: smallSpacing),
+        itemCount: question.explanations.length,
+        itemBuilder: (context, index) {
+          final item = ComponentGroupDecoration(
+              children: [RichContent(question.explanations[index])]);
+          if (index == 0) {
+            return item;
+          } else {
+            return Column(
+              children: [colDivider, item],
+            );
+          }
+        });
   }
 }
 

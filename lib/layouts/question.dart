@@ -10,10 +10,9 @@ import 'package:open_gmat_database/widgets/question_detail.dart';
 import 'package:provider/provider.dart';
 
 class QuestionScreen extends StatelessWidget {
-  QuestionScreen({
-    super.key,
-    required this.railAnimation,
-  });
+  QuestionScreen(
+      {super.key, required this.railAnimation, required this.showSecondList});
+  final bool showSecondList;
   final CurvedAnimation railAnimation;
 
   @override
@@ -21,7 +20,7 @@ class QuestionScreen extends StatelessWidget {
     return Expanded(
         child: Row(children: [
       SizedBox(
-        width: 200,
+        width: showSecondList ? 200 : 160,
         child: Sidebar(),
       ),
       Expanded(
@@ -34,6 +33,7 @@ class QuestionScreen extends StatelessWidget {
                     railAnimation: railAnimation,
                     questionId:
                         state.questionsByCategory[state.selectedQuestionIndex],
+                    showSecondList: showSecondList,
                   )),
       )
     ]));

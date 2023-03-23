@@ -105,6 +105,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       default:
         return QuestionScreen(
           railAnimation: railAnimation,
+          showSecondList: showMediumSizeLayout || showLargeSizeLayout,
         );
     }
   }
@@ -115,7 +116,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         builder: (context, value, child) => value.questionsByCategory.length > 0
             ? Stack(
                 children: [
-                  Center(
+                  Align(
+                    alignment: showMediumSizeLayout || showLargeSizeLayout
+                        ? Alignment.center
+                        : Alignment.centerLeft,
                     child: CountupTimer(
                         key: Key(value
                             .questionsByCategory[value.selectedQuestionIndex])),
