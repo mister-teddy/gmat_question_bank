@@ -1,6 +1,6 @@
 {
-  "name": "open_gmat_database",
-  "short_name": "open_gmat_database",
+  "name": "gmat_question_bank",
+  "short_name": "gmat_question_bank",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:open_gmat_database/constants.dart';
+import 'package:gmat_question_bank/constants.dart';
 
 final List<NavigationDestination> appBarDestinations = [
   NavigationDestination(

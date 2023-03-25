@@ -1,6 +1,6 @@
-# Open GMAT Database
+# GMAT Question Bank
 
-Open GMAT Database is a client for the [GMAT Database](https://github.com/nguyenhongphat0/gmat-database) project, designed to provide users with a wide range of GMAT practice questions to help them prepare for the GMAT exam. This app supports Material You design principles, allowing users to customize the app's appearance to their liking.
+GMAT Question Bank is a client for the [GMAT Database](https://github.com/nguyenhongphat0/gmat-database) project, designed to provide users with a wide range of GMAT practice questions to help them prepare for the GMAT exam. This app supports Material You design principles, allowing users to customize the app's appearance to their liking.
 
 ## Preview
 
@@ -15,7 +15,7 @@ Users can access a vast collection of GMAT practice questions on this app by nav
 
 ### Different Question Types
 
-Open GMAT Database supports five different types of questions: Quantitative Comparison, Data Sufficiency, Problem Solving, Sentence Correction, and Critical Reasoning. Users can select the question type they want to practice and filter the questions based on their difficulty level.
+GMAT Question Bank supports five different types of questions: Quantitative Comparison, Data Sufficiency, Problem Solving, Sentence Correction, and Critical Reasoning. Users can select the question type they want to practice and filter the questions based on their difficulty level.
 
 ### Explanations
 
@@ -23,7 +23,7 @@ For each question, the app provides a detailed explanation of the solution, help
 
 ### Timing
 
-Open GMAT Database also includes a timer feature, allowing users to time their attempts and track their progress. Users can set the time limit for each question or practice set and try to complete it within the specified time. This feature helps users manage their time effectively during the GMAT exam and improve their speed and accuracy.
+GMAT Question Bank also includes a timer feature, allowing users to time their attempts and track their progress. Users can set the time limit for each question or practice set and try to complete it within the specified time. This feature helps users manage their time effectively during the GMAT exam and improve their speed and accuracy.
 
 ### Material You
 

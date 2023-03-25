@@ -3,10 +3,10 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:open_gmat_database/constants.dart';
-import 'package:open_gmat_database/state/database.dart';
-import 'package:open_gmat_database/state/preferences.dart';
-import 'package:open_gmat_database/widgets/question_detail.dart';
+import 'package:gmat_question_bank/constants.dart';
+import 'package:gmat_question_bank/state/database.dart';
+import 'package:gmat_question_bank/state/preferences.dart';
+import 'package:gmat_question_bank/widgets/question_detail.dart';
 import 'package:provider/provider.dart';
 
 class QuestionScreen extends StatelessWidget {

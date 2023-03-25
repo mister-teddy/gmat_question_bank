@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:open_gmat_database/layouts/home.dart';
-import 'package:open_gmat_database/state/database.dart';
-import 'package:open_gmat_database/widgets/component_screen.dart';
-import 'package:open_gmat_database/widgets/rich_content.dart';
+import 'package:gmat_question_bank/layouts/home.dart';
+import 'package:gmat_question_bank/state/database.dart';
+import 'package:gmat_question_bank/widgets/component_screen.dart';
+import 'package:gmat_question_bank/widgets/rich_content.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import '../models/question.dart';

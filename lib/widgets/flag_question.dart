@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:open_gmat_database/state/preferences.dart';
+import 'package:gmat_question_bank/state/preferences.dart';
 import 'package:provider/provider.dart';
 
 class FlagQuestion extends StatelessWidget {

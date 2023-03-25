@@ -22,7 +22,7 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
-      - run: flutter build web --no-sound-null-safety --base-href=/open_gmat_database/ # disable sound null safety because "catex" doesn't support yet
+      - run: flutter build web --no-sound-null-safety --base-href=/gmat_question_bank/ # disable sound null safety because "catex" doesn't support yet
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

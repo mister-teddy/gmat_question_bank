@@ -3,18 +3,18 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:open_gmat_database/menu.dart';
-import 'package:open_gmat_database/state/database.dart';
-import 'package:open_gmat_database/state/preferences.dart';
-import 'package:open_gmat_database/widgets/chatgpt_button.dart';
-import 'package:open_gmat_database/widgets/count_up.dart';
-import 'package:open_gmat_database/widgets/flag_question.dart';
-import 'package:open_gmat_database/widgets/google_translate_button.dart';
-import 'package:open_gmat_database/widgets/grammarly_button.dart';
-import 'package:open_gmat_database/widgets/mark_completed.dart';
-import 'package:open_gmat_database/widgets/view_question_source.dart';
+import 'package:gmat_question_bank/menu.dart';
+import 'package:gmat_question_bank/state/database.dart';
+import 'package:gmat_question_bank/state/preferences.dart';
+import 'package:gmat_question_bank/widgets/chatgpt_button.dart';
+import 'package:gmat_question_bank/widgets/count_up.dart';
+import 'package:gmat_question_bank/widgets/flag_question.dart';
+import 'package:gmat_question_bank/widgets/google_translate_button.dart';
+import 'package:gmat_question_bank/widgets/grammarly_button.dart';
+import 'package:gmat_question_bank/widgets/mark_completed.dart';
+import 'package:gmat_question_bank/widgets/view_question_source.dart';
 import 'package:provider/provider.dart';
-import 'package:open_gmat_database/layouts/question.dart';
+import 'package:gmat_question_bank/layouts/question.dart';
 
 import '../widgets/component_screen.dart';
 import '../constants.dart';

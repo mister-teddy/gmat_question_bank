@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:html/parser.dart';
-import 'package:open_gmat_database/constants.dart';
-import 'package:open_gmat_database/models/database.dart';
+import 'package:gmat_question_bank/constants.dart';
+import 'package:gmat_question_bank/models/database.dart';
 import 'package:http/http.dart' as http;
-import 'package:open_gmat_database/models/question.dart';
+import 'package:gmat_question_bank/models/question.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DatabaseState extends ChangeNotifier {

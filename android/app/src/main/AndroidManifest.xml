@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.open_gmat_database">
+    package="com.example.gmat_question_bank">
    <application
-        android:label="Open GMAT Database"
+        android:label="GMAT Question Bank"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

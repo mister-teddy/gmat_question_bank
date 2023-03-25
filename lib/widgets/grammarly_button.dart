@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:open_gmat_database/state/database.dart';
+import 'package:gmat_question_bank/state/database.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 

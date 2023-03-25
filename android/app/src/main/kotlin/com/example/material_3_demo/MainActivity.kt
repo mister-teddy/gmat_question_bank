@@ -1,4 +1,4 @@
-package com.example.open_gmat_database
+package com.example.gmat_question_bank
 
 import io.flutter.embedding.android.FlutterActivity
 
