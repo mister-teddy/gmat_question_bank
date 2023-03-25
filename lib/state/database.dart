@@ -1,13 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:html/parser.dart';
 import 'package:gmat_question_bank/constants.dart';
 import 'package:gmat_question_bank/models/database.dart';
 import 'package:http/http.dart' as http;
 import 'package:gmat_question_bank/models/question.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DatabaseState extends ChangeNotifier {
   /// Internal, private state of the cart.
@@ -60,12 +58,14 @@ class DatabaseState extends ChangeNotifier {
   }
 
   void setQuestionContent(Question question) {
-    final document = parse(question.question
-        .replaceAll('<br><br>', '<br>')
-        .replaceAll('<br>', '\n'));
-    final String textContent = parse(document.body!.text).documentElement!.text;
+    final document = parse(
+        "${question.question}\n${question.answers?.join('\n') ?? ''}\n${question.subQuestions?.map((sub) => "${sub.question}\n${sub.answers.join('\n')}").join('\n') ?? ''}"
+            .replaceAll('<br><br>', '<br>')
+            .replaceAll('<br>', '\n'));
+    final String textContent = document.body != null
+        ? parse(document.body?.text).documentElement?.text ?? ''
+        : '';
     this.questionContent = textContent;
-    Clipboard.setData(ClipboardData(text: textContent));
     this.questionSrc = question.src;
   }
 }

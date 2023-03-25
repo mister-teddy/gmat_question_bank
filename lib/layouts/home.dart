@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:gmat_question_bank/menu.dart';
 import 'package:gmat_question_bank/state/database.dart';
 import 'package:gmat_question_bank/state/preferences.dart';
-import 'package:gmat_question_bank/widgets/chatgpt_button.dart';
+import 'package:gmat_question_bank/widgets/ask_ai_button.dart';
 import 'package:gmat_question_bank/widgets/count_up.dart';
 import 'package:gmat_question_bank/widgets/flag_question.dart';
 import 'package:gmat_question_bank/widgets/google_translate_button.dart';
 import 'package:gmat_question_bank/widgets/grammarly_button.dart';
 import 'package:gmat_question_bank/widgets/mark_completed.dart';
+import 'package:gmat_question_bank/widgets/navigation_bar.dart';
 import 'package:gmat_question_bank/widgets/view_question_source.dart';
 import 'package:provider/provider.dart';
 import 'package:gmat_question_bank/layouts/question.dart';
 
-import '../widgets/component_screen.dart';
 import '../constants.dart';
 
 class Home extends StatefulWidget {
@@ -150,7 +150,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ViewQuestionSource(),
               GoogleTranslateButton(),
               GrammarlyButton(),
-              ChatGPTButton(),
+              AskAIButton(),
               _ColorSeedButton(
                 handleColorSelect: widget.handleColorSelect,
                 colorSelected: widget.colorSelected,
@@ -220,7 +220,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: GrammarlyButton(),
           ),
           Flexible(
-            child: ChatGPTButton(),
+            child: AskAIButton(),
           ),
           Flexible(
             child: _ColorSeedButton(
@@ -424,7 +424,6 @@ class _NavigationTransitionState extends State<NavigationTransition> {
         backgroundColor: colorScheme.surface,
         child: widget.navigationBar,
       ),
-      endDrawer: const NavigationDrawerSection(),
     );
   }
 }

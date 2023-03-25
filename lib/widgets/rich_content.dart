@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:catex/catex.dart';
 
 class RichContent extends StatelessWidget {

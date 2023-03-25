@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gmat_question_bank/layouts/home.dart';
 import 'package:gmat_question_bank/state/database.dart';
-import 'package:gmat_question_bank/widgets/component_screen.dart';
+import 'package:gmat_question_bank/widgets/component_group_decoration.dart';
 import 'package:gmat_question_bank/widgets/rich_content.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -61,7 +61,7 @@ class _QuestionDetailState extends State<QuestionDetail> {
                           if (question.subQuestions != null)
                             Column(
                               children: List.generate(
-                                question.subQuestions!.length,
+                                question.subQuestions?.length ?? 0,
                                 (index) => Column(
                                   children: [
                                     RichContent(
@@ -152,7 +152,7 @@ class ExplanationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        padding: const EdgeInsetsDirectional.only(end: smallSpacing),
+        padding: const EdgeInsetsDirectional.only(end: 10.0),
         itemCount: question.explanations.length,
         itemBuilder: (context, index) {
           final item = ComponentGroupDecoration(
@@ -161,7 +161,7 @@ class ExplanationList extends StatelessWidget {
             return item;
           } else {
             return Column(
-              children: [colDivider, item],
+              children: [SizedBox(height: 10), item],
             );
           }
         });
