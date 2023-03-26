@@ -57,9 +57,16 @@ class DatabaseState extends ChangeNotifier {
     return [];
   }
 
+  String mapAnswer(List<String> answers) {
+    return answers
+        .map((answer) =>
+            "${String.fromCharCode(65 + answers.indexOf(answer))}. $answer")
+        .join('\n');
+  }
+
   void setQuestionContent(Question question) {
     final document = parse(
-        "${question.question}\n${question.answers?.join('\n') ?? ''}\n${question.subQuestions?.map((sub) => "${sub.question}\n${sub.answers.join('\n')}").join('\n') ?? ''}"
+        "${question.question}\n${mapAnswer(question.answers ?? [])}\n${question.subQuestions?.map((sub) => "${sub.question}\n${mapAnswer(sub.answers)}\n").join('\n') ?? ''}"
             .replaceAll('<br><br>', '<br>')
             .replaceAll('<br>', '\n'));
     final String textContent = document.body != null
