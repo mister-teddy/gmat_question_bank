@@ -8,6 +8,9 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  deployments: write
+  id-token: write
 
 jobs:
   build-and-deploy:
@@ -22,9 +25,15 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
-      - run: flutter build web --no-sound-null-safety --base-href=/gmat_question_bank/ # disable sound null safety because "catex" doesn't support yet
+      - run: flutter build web --web-renderer html --no-sound-null-safety --base-href=/gmat_question_bank/ # disable sound null safety because "catex" doesn't support yet
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      # Must run in the same jobs otherwise previous output won't be kept
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          folder: build/web
+          path: "./build/web"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
