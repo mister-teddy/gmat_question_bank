@@ -65,6 +65,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "GMAT Question Bank",
       debugShowCheckedModeBanner: false,
       themeMode: themeMode,
       theme: ThemeData(
