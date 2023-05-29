@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:gmat_question_bank/constants.dart';
 import 'package:gmat_question_bank/layouts/home.dart';
 import 'package:gmat_question_bank/state/database.dart';
 import 'package:gmat_question_bank/widgets/component_group_decoration.dart';
@@ -16,8 +17,7 @@ class QuestionDetail extends StatefulWidget {
     required this.questionId,
     required this.showSecondList,
   }) : _future = http
-            .get(Uri.parse(
-                'https://nguyenhongphat0.github.io/gmat-database/$questionId.json'))
+            .get(Uri.parse('$GMAT_DATABASE_ENDPOINT/$questionId.json'))
             .then((value) => Question.fromJson(jsonDecode(value.body)));
 
   final String questionId;

@@ -20,8 +20,8 @@ class DatabaseState extends ChangeNotifier {
   }
 
   Future _init() async {
-    final value = await http.get(Uri.parse(
-        'https://nguyenhongphat0.github.io/gmat-database/index.json'));
+    final value =
+        await http.get(Uri.parse('$GMAT_DATABASE_ENDPOINT/index.json'));
     final database = Database.fromJson(jsonDecode(value.body));
     this.database = database;
     print(database);
