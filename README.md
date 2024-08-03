@@ -1,6 +1,6 @@
 # GMAT Question Bank
 
-GMAT Question Bank is a client for the [GMAT Database](https://github.com/teddyfullstack/gmat-database) project, designed to provide users with a wide range of GMAT practice questions to help them prepare for the GMAT exam. This app supports Material You design principles, allowing users to customize the app's appearance to their liking.
+GMAT Question Bank is a client for the [GMAT Database](https://github.com/teddyos/gmat-database) project, designed to provide users with a wide range of GMAT practice questions to help them prepare for the GMAT exam. This app supports Material You design principles, allowing users to customize the app's appearance to their liking.
 
 ## Preview
 

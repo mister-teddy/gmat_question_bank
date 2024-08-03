@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const String GMAT_DATABASE_ENDPOINT =
-    "https://teddyfullstack.github.io/gmat-database";
+    "https://teddyos.github.io/gmat-database";
 
 const double narrowScreenWidthThreshold = 450;
 const double mediumWidthBreakpoint = 1000;

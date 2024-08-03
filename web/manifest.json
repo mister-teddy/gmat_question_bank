@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#0175C2",
   "theme_color": "#0175C2",
-  "description": "GMAT Question Bank is a client for the https://github.com/teddyfullstack/gmat-database, designed to provide users with a wide range of GMAT practice questions to help them prepare for the GMAT exam. This app supports Material You design principles, allowing users to customize the app's appearance to their liking.",
+  "description": "GMAT Question Bank is a client for the https://github.com/teddyos/gmat-database, designed to provide users with a wide range of GMAT practice questions to help them prepare for the GMAT exam. This app supports Material You design principles, allowing users to customize the app's appearance to their liking.",
   "orientation": "portrait-primary",
   "prefer_related_applications": false,
   "icons": [
